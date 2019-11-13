@@ -25,19 +25,21 @@ namespace Client
 
         private static void SendLoop()
         {
+            Random r = new Random();
             while (true)
             {
                 Thread.Sleep(2300);
                 try
                 {
-                    byte[] buffer = Encoding.UTF8.GetBytes("21,1"+" Client:"+n);
+                    double d = r.Next(20,90)*1.14;
+                    byte[] buffer = Encoding.UTF8.GetBytes(d+" Client:"+n);
                     clientSocket.Send(buffer);
 
                     byte[] receivedBuf = new byte[1234];
                     int rec = clientSocket.Receive(receivedBuf);
                     byte[] data = new byte[rec];
                     Array.Copy(receivedBuf, data, rec);
-                    Message("Получено: " + Encoding.UTF8.GetString(data));
+                    Message("Ответ сервера " + Encoding.UTF8.GetString(data));
                 }
                 catch (SocketException)
                 {

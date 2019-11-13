@@ -57,7 +57,7 @@ namespace Server
                         break;
                     }
                 }
-                string toSend = Convert.ToDouble(accepted)+"-значение, отправленное серверу"; 
+                string toSend = "Умножение на 1,23: "+Convert.ToDouble(accepted)*1.23; //Я сделал увиличение значения в 1,23 раза, потому что не знал, что делать
 
                 byte[] data = Encoding.UTF8.GetBytes(toSend); 
                 socket.BeginSend(data, 0, data.Length, SocketFlags.None, new AsyncCallback(SendCallback), socket);
